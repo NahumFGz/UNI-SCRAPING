@@ -50,7 +50,7 @@ def download_driver(path):
         print("Estás utilizando Linux.")
 
     elif os_platform == "darwin":
-        system_version = version_number + "/	chromedriver_mac_arm64.zip"
+        system_version = version_number + "/chromedriver_mac_arm64.zip"
         print("Estás utilizando macOS.")
 
     else:
