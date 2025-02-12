@@ -7,3 +7,5 @@ https://www.senamhi.gob.pe/site/descarga-datos/map_hist_data.php
 # Inspeccionar y buscar en text/javascript
 
 https://www.senamhi.gob.pe/site/descarga-datos/descarga/?cod=152204
+
+brew install tesseract
