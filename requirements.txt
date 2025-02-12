@@ -6,5 +6,6 @@ wget==3.2
 selenium==4.10.0
 webdriver-manager==4.0.0
 pygsheets==2.0.6
+pillow==11.1.0
 pandas
 pyarrow
