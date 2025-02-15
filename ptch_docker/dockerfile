@@ -1,0 +1,15 @@
+# Usar la imagen oficial de Selenium con Chrome y ChromeDriver preinstalados
+FROM selenium/standalone-chrome:latest
+
+# Instalar Python y sus dependencias para ejecutar scripts de Selenium
+USER root
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copiar el script de Selenium al contenedor
+COPY script.py /script.py
+
+# Establecer el punto de entrada en bash (puedes cambiarlo si necesitas ejecutar el script automáticamente)
+CMD ["bash"]
