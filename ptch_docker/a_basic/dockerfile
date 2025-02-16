@@ -11,5 +11,5 @@ RUN apt-get update && apt-get install -y \
 # Copiar el script de Selenium al contenedor
 COPY script.py /script.py
 
-# Establecer el punto de entrada en bash (puedes cambiarlo si necesitas ejecutar el script automáticamente)
-CMD ["bash"]
+# Ejecutar Selenium cuando el contenedor arranque
+CMD ["/opt/bin/entry_point.sh"]
