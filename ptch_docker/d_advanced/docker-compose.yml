@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  selenium:
+    image: selenium/standalone-chrome:latest
+    container_name: selenium
+    ports:
+      - "4444:4444"  # Expone el puerto de Selenium para WebDriver
+    shm_size: "2g"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4444/status"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 5s
+
+  runner:
+    build: .
+    container_name: demo_runner
+    depends_on:
+      selenium:
+        condition: service_healthy  # Solo arranca cuando Selenium esté saludable
+    volumes:
+      - /home/nahumfg/Projects/GithubProjects/UNI-SCRAPING/ptch_docker/d_advanced/outputs:/home/seluser/Downloads
+    command: ["/home/seluser/venv/bin/python", "/home/seluser/demo.py"]

@@ -1,0 +1,28 @@
+# (1) Usar la imagen oficial de Selenium con Chrome y ChromeDriver
+FROM selenium/standalone-chrome:latest
+
+# (2) Instalar Python, pip, venv
+USER root
+RUN apt-get update && apt-get install -y \
+    python3 python3-pip python3-venv curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# (3) Crear carpeta Downloads para seluser
+RUN mkdir -p /home/seluser/Downloads \
+    && chown -R seluser:seluser /home/seluser/Downloads \
+    && chmod -R 777 /home/seluser/Downloads
+
+# (4) Volver a usuario 'seluser'
+USER seluser
+WORKDIR /home/seluser
+
+# (5) Crear un entorno virtual e instalar librerías
+RUN python3 -m venv venv
+COPY requirements.txt requirements.txt
+RUN /home/seluser/venv/bin/pip install --no-cache-dir -r requirements.txt
+
+# (6) Copiar los archivos del script
+COPY demo.py demo.py
+
+# (7) Dejar que el comando se ejecute desde `docker-compose.yml`
+# CMD ["tail", "-f", "/dev/null"]  # Para que el contenedor no se detenga
