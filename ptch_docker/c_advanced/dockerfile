@@ -1,0 +1,48 @@
+############################################
+# (1) Usar la imagen oficial de Selenium con Chrome y ChromeDriver
+############################################
+FROM selenium/standalone-chrome:latest
+
+############################################
+# (2) Instalar Python, pip, venv
+############################################
+USER root
+RUN apt-get update && apt-get install -y \
+    python3 python3-pip python3-venv curl \
+    && rm -rf /var/lib/apt/lists/*
+
+############################################
+# (3) Crear carpeta Downloads para seluser
+############################################
+RUN mkdir -p /home/seluser/Downloads \
+    && chown -R seluser:seluser /home/seluser/Downloads \
+    && chmod -R 777 /home/seluser/Downloads
+
+############################################
+# (4) Copiar el script de espera y darle permisos como root
+############################################
+COPY wait-for-selenium.sh /home/seluser/wait-for-selenium.sh
+RUN chmod +x /home/seluser/wait-for-selenium.sh
+
+############################################
+# (5) Volver a usuario 'seluser'
+############################################
+USER seluser
+WORKDIR /home/seluser
+
+############################################
+# (6) Crear un entorno virtual e instalar librerías
+############################################
+RUN python3 -m venv venv
+COPY requirements.txt requirements.txt
+RUN /home/seluser/venv/bin/pip install --no-cache-dir -r requirements.txt
+
+############################################
+# (7) Copiar el script de Selenium
+############################################
+COPY demo.py demo.py
+
+############################################
+# (8) Ejecutar el script de espera antes de correr demo.py
+############################################
+CMD ["/home/seluser/wait-for-selenium.sh"]
