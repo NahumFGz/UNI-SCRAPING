@@ -1,0 +1,12 @@
+# Usar la imagen oficial de Selenium con Chrome y ChromeDriver preinstalados
+FROM selenium/standalone-chrome:latest
+
+# Instalar Python y sus dependencias para ejecutar scripts de Selenium
+USER root
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Ejecutar Selenium cuando el contenedor arranque
+CMD ["/opt/bin/entry_point.sh"]
