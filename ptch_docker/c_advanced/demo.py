@@ -55,11 +55,13 @@ if __name__ == "__main__":
     url = "https://www.senamhi.gob.pe/mapas/mapa-estaciones-2/map_red_graf.php?cod=112163&estado=REAL&tipo_esta=M&cate=CO&cod_old="
     driver.get(url)
     take_screenshot(driver, image_name="1.png")
+    print("1.png")
     time.sleep(1.5)
 
     # Click en el botón "Tabla" usando By.ID
     driver.find_element(By.ID, "tabl").click()
     take_screenshot(driver, image_name="2.png")
+    print("2.png")
     time.sleep(1.5)
 
     # Extraer el html de la página
@@ -74,6 +76,7 @@ if __name__ == "__main__":
         print("Captcha no encontrado")
 
     take_screenshot(driver, image_name="3.png")
+    print("3.png")
     time.sleep(1.5)
 
     # Encontrar el campo de entrada del captcha por su ID
@@ -82,19 +85,23 @@ if __name__ == "__main__":
     # Ingresar el texto del captcha
     captcha_input.send_keys(captcha_element.text)
     take_screenshot(driver, image_name="4.png")
+    print("4.png")
     time.sleep(1.5)
 
     # Click en el botón "Verificar" usando By.ID
     driver.find_element(By.ID, "entrar").click()
     take_screenshot(driver, image_name="5.png")
+    print("5.png")
     time.sleep(1.5)
 
     driver.switch_to.frame("contenedor")
     take_screenshot(driver, image_name="6.png")
+    print("6.png")
     time.sleep(1.5)
 
     driver.find_element(By.ID, "export101").click()
     take_screenshot(driver, image_name="7.png")
+    print("7.png")
     time.sleep(1.5)
 
     driver.quit()
