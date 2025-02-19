@@ -73,7 +73,7 @@ Colección de soluciones de web scraping utilizando Selenium dentro de contenedo
   - Python (venv)
   - Docker
   - Shell scripting
-- **Descripción**: Nivel avanzado con optimización del entorno de ejecución y espera de Selenium.
+- **Descripción**: Nivel avanzado uso del shell y espera de Selenium.
 
 #### d_advanced
 - **Tecnología**: Selenium en Docker con Docker Compose para orquestación
